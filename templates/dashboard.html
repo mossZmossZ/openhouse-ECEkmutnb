@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>IP Logs Dashboard (Admin Page Logs)</h2>
+                <a href="/logout" class="btn btn-danger float-right">Logout</a>
+            </div>
+            <div class="card-body">
+                <h5>Total Logs: {{ log_count }}</h5>
+                <form action="/clear_logs" method="POST">
+                    <button type="submit" class="btn btn-warning mb-3">Clear Log Data</button>
+                </form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>number</th> <!-- Running number column -->
+                            <th>IP Address</th>
+                            <th>Timestamp</th>
+                            <th>Route</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ loop.index }}</td> <!-- This adds the running number -->
+                                <td>{{ log['ip'] }}</td>
+                                <td>{{ log['timestamp'] }}</td>
+                                <td>{{ log['route'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
